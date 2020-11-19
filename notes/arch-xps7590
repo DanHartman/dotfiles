@@ -75,3 +75,5 @@ mkswap /dev/nvme0n1p7
 mount /dev/nvme0n1p3 /mnt
 swapon /dev/nvme0n1p7
 
+# Install essential packages
+pacstrap /mnt base linux linux-firmware vim networkmanager
