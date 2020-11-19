@@ -66,3 +66,12 @@ t (change partition type)
   19 (for linux swap)
 w (write partition changes)
 
+# Formatting
+mkfs.ext4 /dev/nvme0n1p3
+y (to prompt warning that it contained DOS/MBR boot sector data)
+mkswap /dev/nvme0n1p7
+
+# Mount file systems
+mount /dev/nvme0n1p3 /mnt
+swapon /dev/nvme0n1p7
+
