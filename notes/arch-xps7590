@@ -44,4 +44,25 @@ iwctl
   station wlan0 connect gonnaARDENmyHARTmen
     - enter passphrase when prompted
   exit
-  
+
+# Update system clock
+timedatectl set-ntp true
+
+# Partitioning
+fdisk /dev/nvme0n1
+d (delete partition)
+  3 (Microsoft basic data 936.7G)
+n (make new partition)
+  3 (the previously deleted slot)
+  hit enter for default first sector
+  +870G (create 870GB partition)
+  Y (remove bitlocker signature)
+n (make new partition)
+  7 (next available partition number)
+  hit enter for default first sector
+  +64G (create 64GB partition for swap)
+t (change partition type)
+  7 (partition number created for swap)
+  19 (for linux swap)
+w (write partition changes)
+
