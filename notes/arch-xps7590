@@ -28,3 +28,20 @@ Press Enter
 Text was TINY
 But it is shonuff working
 
+# Keyboard layout
+no mod, left as default
+
+# Verify boot mode
+ls /sys/firmware/efi/efivars
+  - no error occured, which means it is booted in UEFI mode
+
+# Connect to internet
+ip link
+iwctl
+  device list
+  station wlan0 scan
+  station wlan0 get-networks
+  station wlan0 connect gonnaARDENmyHARTmen
+    - enter passphrase when prompted
+  exit
+  
