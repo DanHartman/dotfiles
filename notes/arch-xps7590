@@ -1,1 +1,30 @@
 # document from arch installation medium to bootable dell 2019 xps7590 running arch linux
+
+# UEFI settings
+enter BIOS: press F2 @ poweron
+expand "System Configuration"
+  Select "SATA Operation"
+  Click "AHCI" radio button
+  Agree to popup warning
+  Click Apply
+  Select "USB Configuration"
+  Verify "Enable USB Boot Support" is checked
+expand "Secure Boot"
+  Select "Secure Boot Enable"
+  Uncheck "Secure Boot Enable"
+  Agree to popup warning
+  Click Apply
+expand "POST Behavior"
+  Select "Fastboot"
+  Click "Thorough" radio button
+  Click Apply
+insert installation medium USB
+click "Exit"
+
+# Live USB
+Boot from USB: press F12 @ poweron
+Arrow key to select USB drive
+Press Enter
+Text was TINY
+But it is shonuff working
+
