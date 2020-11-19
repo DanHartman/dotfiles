@@ -77,3 +77,22 @@ swapon /dev/nvme0n1p7
 
 # Install essential packages
 pacstrap /mnt base linux linux-firmware vim networkmanager
+
+# Configure the system
+genfstab -U /mnt >> /mnt/etc/fstab
+
+# Chroot
+arch-chroot /mnt
+
+# Time zone
+ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
+hwclock --systohc
+date (verify)
+
+# Localization
+vim /etc/locale.gen
+  uncomment en_US.UTF-8 UTF-8
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+
