@@ -1,0 +1,9 @@
+[user]
+	email = dan.h@rtman.org
+	name = Dan Hartman
+
+[core]
+    excludesfile = /home/hrtmn/.gitignore_global
+
+[pull]
+	rebase = true
