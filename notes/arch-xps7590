@@ -141,8 +141,18 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S git base-devel
 cd /opt/
 git clone https://aur.archlinux.org/yay-git.git
-chown -R hrtmn:wheel ./yay-git/
+chown -R ${USER}:wheel ./yay-git/
 cd yay-git/
 sudo su ${USER}
 sudo chown -R ${USER}:wheel /home/${USER}
 makepkg -si
+exit
+
+# Powertop
+pacman -S powertop
+
+# Reboot
+exit
+umount -R /mnt
+reboot
+  (yank that USB drive)
