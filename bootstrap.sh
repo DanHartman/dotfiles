@@ -15,7 +15,7 @@ curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOM
 yay -S ttf-droid ttf-iosevka ttf-font-awesome noto-fonts-emoji
 
 # audio
-yay -S pulseaudio pamixer
+yay -S pulseaudio pamixer alsa-utils
 
 # browsers
 yay -S google-chrome firefox
