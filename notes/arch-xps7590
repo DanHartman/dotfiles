@@ -127,4 +127,11 @@ grub-mkconfig -o /boot/grub/grub.cfg
 pacman -S sudo
 visudo
   uncomment to allow members of group wheel to execute any command
-useradd -g wheel hrtmn
+useradd -g wheel ${USER}
+mkdir /home/${USER}
+usermod -d /home/${USER}/ -m ${USER}
+
+# Power management
+vim /etc/default/grub
+  GRUM_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet mem_sleep_default=deep"
+grub-mkconfig -o /boot/grub/grub.cfg
