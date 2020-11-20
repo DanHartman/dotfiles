@@ -119,4 +119,6 @@ vim /etc/default/grub
   uncomment GRUB_SAVEDEFAULT
 grub-mkconfig -o /boot/grub/grub.cfg
 
-
+# Microcode
+pacman -S intel-ucode
+grub-mkconfig -o /boot/grub/grub.cfg
