@@ -7,7 +7,7 @@ SCRIPT_NAME=$(basename "$0")
 yay -S curl wget rsync xdg-utils htop
 
 # can I get a desktop?
-yay -S i3-wm xorg-xinit rofi xorg-server
+yay -S i3-wm i3status xorg-xinit rofi xorg-server 
 mkdir -p ${HOME}/Pictures
 curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOME}/Pictures/wallpaper.jpg
 
