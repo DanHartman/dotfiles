@@ -7,7 +7,7 @@ SCRIPT_NAME=$(basename "$0")
 yay -S curl wget rsync xdg-utils htop
 
 # can I get a desktop?
-yay -S i3-wm i3status xorg-xinit rofi xorg-server 
+yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu
 mkdir -p ${HOME}/Pictures
 curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOME}/Pictures/wallpaper.jpg
 
@@ -19,9 +19,9 @@ yay -S pulseaudio pamixer
 
 # browsers
 yay -S google-chrome firefox
-sudo xdg-mime default google-chrome.desktop x-scheme-handler/http
-sudo xdg-mime default google-chrome.desktop x-scheme-handler/https
-sudo xdg-mime default google-chrome.desktop text/ht
+xdg-mime default google-chrome.desktop x-scheme-handler/http
+xdg-mime default google-chrome.desktop x-scheme-handler/https
+xdg-mime default google-chrome.desktop text/ht
 
 # shell
 yay -S zsh alacritty
