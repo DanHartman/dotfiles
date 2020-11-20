@@ -130,8 +130,19 @@ visudo
 useradd -g wheel ${USER}
 mkdir /home/${USER}
 usermod -d /home/${USER}/ -m ${USER}
+passwd ${USER}
 
 # Power management
 vim /etc/default/grub
   GRUM_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet mem_sleep_default=deep"
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# YAY
+pacman -S git base-devel
+cd /opt/
+git clone https://aur.archlinux.org/yay-git.git
+chown -R hrtmn:wheel ./yay-git/
+cd yay-git/
+sudo su ${USER}
+sudo chown -R ${USER}:wheel /home/${USER}
+makepkg -si
