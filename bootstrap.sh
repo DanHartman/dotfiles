@@ -4,7 +4,7 @@ DIR="$( cd "$( dirname "${0}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME=$(basename "$0")
 
 # utils
-yay -S curl wget rsync
+yay -S curl wget rsync xdg-utils
 
 # can I get a desktop?
 yay -S i3-wm xorg-xinit rofi
