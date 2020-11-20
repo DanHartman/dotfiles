@@ -32,6 +32,7 @@ cd ~ && git clone https://github.com/nojhan/liquidprompt.git
 yay -S zoom
 
 # dev
+sudo pacman -Syu
 yay -S jq go code-git docker docker-compose linux-aufs virtualbox virtualbox-host-modules-arch vagrant xclip
 sudo systemctl enable docker
 sudo systemctl start docker
