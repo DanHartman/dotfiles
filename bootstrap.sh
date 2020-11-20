@@ -33,7 +33,7 @@ yay -S zoom
 
 # dev
 sudo pacman -Syu
-yay -S jq go code-git docker docker-compose linux-aufs virtualbox virtualbox-host-modules-arch vagrant xclip
+yay -S jq go atom docker docker-compose linux-aufs virtualbox virtualbox-host-modules-arch vagrant xclip
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo gpasswd -a "${USER}" docker
