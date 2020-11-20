@@ -24,7 +24,7 @@ sudo xdg-mime default google-chrome.desktop x-scheme-handler/https
 sudo xdg-mime default google-chrome.desktop text/ht
 
 # shell
-yay -S zsh antibody alacritty
+yay -S zsh alacritty
 test -d ~/liquidprompt && rm -rf ~/liquidprompt
 cd ~ && git clone https://github.com/nojhan/liquidprompt.git
 
