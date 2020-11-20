@@ -104,3 +104,19 @@ cat <<EOF >> /etc/hosts
 127.0.1.1 riker.localdomain riker
 EOF
 
+# Root password
+passwd
+
+# Boot loader
+pacman -S grub efibootmgr
+mkdir /boot/EFI
+mount /dev/sda1 /boot/EFI/
+grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
+vim /etc/default/grub
+  GRUB_DEFAULT=saved
+  GRUB_TIMEOUT=3
+  uncomment GRUB_COLOR_NORMAL
+  uncomment GRUB_SAVEDEFAULT
+grub-mkconfig -o /boot/grub/grub.cfg
+
+
