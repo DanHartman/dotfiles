@@ -29,7 +29,7 @@ test -d ~/liquidprompt && rm -rf ~/liquidprompt
 cd ~ && git clone https://github.com/nojhan/liquidprompt.git
 
 # chat
-yay -S zoom
+yay -S zoom signal-desktop
 
 # dev
 sudo pacman -Syu
@@ -39,7 +39,7 @@ sudo systemctl start docker
 sudo gpasswd -a "${USER}" docker
 
 # networking
-yay -S wpa_supplicant iwlwifi resolvconf openconnect
+yay -S wpa_supplicant iwlwifi resolvconf openconnect networkmanager-openconnect
 sudo systemctl enable wpa_supplicant
 sudo gpasswd -a "${USER}" network
 yay -R dhcpcd
