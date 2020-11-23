@@ -7,3 +7,6 @@ fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
+
+alias pbcopy='xclip -sel clip'
+alias pbpaste='xclip -o -sel clip'
