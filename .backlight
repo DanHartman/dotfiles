@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+BL_DEVICE=/sys/class/backlight/intel_backlight/brightness
+UPPER_BOUND=512
+LOWER_BOUND=16
+INCREMENT=16
+BRIGHTNESS=$(cat $BL_DEVICE)
+DIMMER=$((${BRIGHTNESS}-${INCREMENT}))
+BRIGHTER=$((${BRIGHTNESS}+${INCREMENT}))
+
+up () {
+  if test "${BRIGHTER}" -gt "${UPPER_BOUND}"; then
+    VAL=${UPPER_BOUND}
+  else
+    VAL=${BRIGHTER}
+  fi
+  echo ${VAL} | tee $BL_DEVICE
+}
+
+down () {
+  if test "${DIMMER}" -lt "${LOWER_BOUND}"; then
+    VAL=${LOWER_BOUND}
+  else
+    VAL=${DIMMER}
+  fi
+  echo ${VAL} | tee $BL_DEVICE
+}
+
+"$@"

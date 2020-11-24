@@ -125,6 +125,10 @@ bindsym XF86AudioRaiseVolume exec "amixer set Master 5%+"
 bindsym XF86AudioLowerVolume exec "amixer set Master 5%-"
 bindsym XF86AudioMute exec "amixer set Master toggle"
 
+# video
+bindsym XF86MonBrightnessUp exec "/home/hrtmn/.backlight up"
+bindsym XF86MonBrightnessDown exec "/home/hrtmn/.backlight down"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
