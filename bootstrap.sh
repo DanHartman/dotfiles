@@ -19,9 +19,9 @@ yay -S pulseaudio pamixer alsa-utils
 
 # browsers
 yay -S google-chrome firefox
-xdg-mime default google-chrome.desktop x-scheme-handler/http
-xdg-mime default google-chrome.desktop x-scheme-handler/https
-xdg-mime default google-chrome.desktop text/ht
+xdg-mime default google-chrome-stable.desktop x-scheme-handler/http
+xdg-mime default google-chrome-stable.desktop x-scheme-handler/https
+xdg-mime default google-chrome-stable.desktop text/ht
 
 # shell
 yay -S zsh alacritty
