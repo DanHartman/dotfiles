@@ -17,6 +17,9 @@ yay -S ttf-droid ttf-iosevka ttf-font-awesome noto-fonts-emoji
 # audio
 yay -S pulseaudio pamixer alsa-utils
 
+# video
+sudo gpasswd -a "${USER}" video
+
 # browsers
 yay -S google-chrome firefox
 xdg-mime default google-chrome-stable.desktop x-scheme-handler/http
