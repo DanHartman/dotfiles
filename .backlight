@@ -15,7 +15,7 @@ Add ${user} to the video group:
 sudo gpasswd -a ${user} video
 
 Create a udev rule to modify permissions on boot:
-cat <<RULE > /etc/udev/rules.d/backlight.rules
+sudo cat <<RULE > /etc/udev/rules.d/backlight.rules
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness"
 ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"
 RULE
