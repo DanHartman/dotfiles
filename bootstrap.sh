@@ -44,7 +44,6 @@ sudo systemctl start docker
 sudo gpasswd -a "${USER}" docker
 
 echo "networking"
-yay -S wpa_supplicant iwlwifi resolvconf openconnect networkmanager-openconnect
+yay -S wpa_supplicant resolvconf openconnect networkmanager-openconnect
 sudo systemctl enable wpa_supplicant
 sudo gpasswd -a "${USER}" network
-yay -R dhcpcd
