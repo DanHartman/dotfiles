@@ -21,10 +21,10 @@ yay -S pulseaudio pamixer alsa-utils
 sudo gpasswd -a "${USER}" video
 
 # browsers
-yay -S google-chrome firefox
-xdg-mime default google-chrome-stable.desktop x-scheme-handler/http
-xdg-mime default google-chrome-stable.desktop x-scheme-handler/https
-xdg-mime default google-chrome-stable.desktop text/ht
+yay -S google-chrome
+sudo xdg-mime default google-chrome-stable.desktop x-scheme-handler/http
+sudo xdg-mime default google-chrome-stable.desktop x-scheme-handler/https
+sudo xdg-mime default google-chrome-stable.desktop text/ht
 
 # shell
 yay -S zsh alacritty
