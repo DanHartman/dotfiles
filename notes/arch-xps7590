@@ -155,6 +155,8 @@ pacman -S powertop
 sudo su ${USER}
 cd ${HOME}
 git clone https://github.com/DanHartman/dotfiles.git
+cd dotfiles
+./bootstrap.sh
 
 # Reboot
 exit
