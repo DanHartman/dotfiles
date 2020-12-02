@@ -3,6 +3,9 @@ set -euo pipefail
 DIR="$( cd "$( dirname "${0}" )" >/dev/null 2>&1 && pwd )"
 SCRIPT_NAME=$(basename "$0")
 
+# update system
+sudo pacman -Syu
+
 # utils
 yay -S curl wget rsync xdg-utils htop openssh
 
@@ -15,7 +18,7 @@ curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOM
 yay -S ttf-droid ttf-iosevka ttf-font-awesome noto-fonts-emoji
 
 # audio
-yay -S pulseaudio pamixer alsa-utils
+yay -S pulseaudio pamixer alsa-utils pavucontrol
 
 # video
 sudo gpasswd -a "${USER}" video
@@ -35,7 +38,6 @@ cd ~ && git clone https://github.com/nojhan/liquidprompt.git
 yay -S zoom signal-desktop
 
 # dev
-sudo pacman -Syu
 yay -S jq go atom docker docker-compose linux-aufs virtualbox virtualbox-host-modules-arch vagrant xclip
 sudo systemctl enable docker
 sudo systemctl start docker
