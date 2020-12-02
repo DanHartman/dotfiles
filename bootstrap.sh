@@ -47,3 +47,6 @@ echo "networking"
 yay -S wpa_supplicant resolvconf openconnect networkmanager-openconnect
 sudo systemctl enable wpa_supplicant
 sudo gpasswd -a "${USER}" network
+
+echo "backlight kernel"
+yay -S linux-oled
