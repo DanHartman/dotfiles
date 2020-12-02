@@ -10,7 +10,7 @@ echo "utils"
 yay -S curl wget rsync xdg-utils htop openssh
 
 echo "can I get a desktop?"
-yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu
+yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu xf86-input-libinput
 mkdir -p ${HOME}/Pictures
 curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOME}/Pictures/wallpaper.jpg
 
