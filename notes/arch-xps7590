@@ -151,6 +151,11 @@ exit
 # Powertop
 pacman -S powertop
 
+# Dotfiles
+sudo su ${USER}
+cd ${HOME}
+git clone https://github.com/DanHartman/dotfiles.git
+
 # Reboot
 exit
 umount -R /mnt
