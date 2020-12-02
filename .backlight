@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 BL_DEVICE=/sys/class/backlight/intel_backlight/brightness
-UPPER_BOUND=512
-LOWER_BOUND=16
-INCREMENT=16
+UPPER_BOUND=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+LOWER_BOUND=4
 BRIGHTNESS=$(cat $BL_DEVICE)
+INCREMENT=$(echo "($(echo "l(${BRIGHTNESS})/l(2.25)" | bc -l)+0.5)/1" | bc)
 DIMMER=$((${BRIGHTNESS}-${INCREMENT}))
 BRIGHTER=$((${BRIGHTNESS}+${INCREMENT}))
 
