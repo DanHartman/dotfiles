@@ -157,6 +157,7 @@ cd ${HOME}
 git clone https://github.com/DanHartman/dotfiles.git
 cd dotfiles
 ./bootstrap.sh
+./install.sh
 
 # Reboot
 exit
