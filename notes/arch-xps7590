@@ -110,7 +110,7 @@ passwd
 # Boot loader
 pacman -S grub efibootmgr
 mkdir /boot/EFI
-mount /dev/sda1 /boot/EFI/
+mount /dev/sda2 /boot/EFI/  # use fdisk -l to see which partition on the USB disk is the EFI System
 grub-install --target=x86_64-efi --efi-directory=/boot/EFI/ --bootloader-id=GRUB
 vim /etc/default/grub
   GRUB_DEFAULT=saved
