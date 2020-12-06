@@ -36,14 +36,15 @@ no mod, left as default
   * no error occured, which means it is booted in UEFI mode
 
 ## Connect to internet
-* `ip link`
-* `iwctl`
-  * `device list`
-  * `station wlan0 scan`
-  * `station wlan0 get-networks`
-  * `station wlan0 connect gonnaARDENmyHARTmen`
-    * enter passphrase when prompted
-  * `exit`
+```sh
+ip link
+iwctl
+  device list
+  station wlan0 scan
+  station wlan0 get-networks
+  station wlan0 connect ${YOUR_SSID}
+  exit
+```
 
 ## Update system clock
 `timedatectl set-ntp true`
