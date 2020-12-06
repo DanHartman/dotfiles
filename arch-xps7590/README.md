@@ -174,14 +174,15 @@ cd dotfiles
 arch-xps7590/bootstrap.sh
 ./install.sh
 ```
-# known_hosts
-curl "https://github.com/danhartman.keys" >> ${HOME}/.ssh/known_hosts
+## known_hosts
+`curl "https://github.com/danhartman.keys" >> ${HOME}/.ssh/known_hosts`
 
-# update grub with since new kernel(s) may have been installed
-grub-mkconfig -o /boot/grub/grub.cfg
+## update grub with since new kernel(s) may have been installed
+`grub-mkconfig -o /boot/grub/grub.cfg`
 
-# Reboot
+## Reboot
+```sh
 exit
 umount -R /mnt
 reboot
-  (yank that USB drive)
+```
