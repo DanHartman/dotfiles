@@ -3,7 +3,7 @@
 	name = Dan Hartman
 
 [core]
-    excludesfile = /home/hrtmn/.gitignore_global
+  excludesfile = /home/hrtmn/.gitignore_global
 
 [pull]
 	rebase = true
