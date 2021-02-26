@@ -7,11 +7,12 @@ echo "update system"
 sudo pacman -Syu
 
 echo "utils"
-yay -S curl wget rsync xdg-utils htop openssh
+yay -S curl wget rsync xdg-utils htop openssh inetutils
 
 echo "can I get a desktop?"
-yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu xf86-input-libinput feh
+yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu xf86-input-libinput feh flameshot
 mkdir -p ${HOME}/Pictures
+mkdir -p ${HOME}/Pictures/Screenshots
 curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOME}/Pictures/wallpaper.jpg
 
 echo "fonts"
@@ -38,7 +39,7 @@ echo "chat"
 yay -S zoom signal-desktop
 
 echo "dev"
-yay -S jq go atom docker docker-compose linux-aufs virtualbox virtualbox-host-modules-arch vagrant xclip
+yay -S jq go atom docker docker-compose virtualbox virtualbox-host-modules-arch vagrant xclip
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo gpasswd -a "${USER}" docker
