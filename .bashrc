@@ -10,3 +10,8 @@ fi
 
 alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -o -sel clip'
+alias bcpass='lpass show -p 8852603823818195881'
+alias auxpass="lpass show --notes 8852603823818195881 | grep Aux | awk '{ print \$NF }' | tr -d [:space:]"
+alias jenkinspass="lpass show --notes 8852603823818195881 | grep Jenkins | awk '{ print \$NF }' | tr -d [:space:]"
+alias bceagle='printf "%s\n1\n" "$(bcpass)" | sudo openconnect -u HARTMADE --passwd-on-stdin eaglevpn.bc.edu'
+alias bcaux='printf "%s\n1\n" "$(auxpass)" | sudo openconnect -u dan@scaleout.team --passwd-on-stdin --servercert pin-sha256:awI56hJkEeKZJ1Q/53X341+LYm0cjxUgYq0WcM4eql4= auxvpn.bc.edu'
