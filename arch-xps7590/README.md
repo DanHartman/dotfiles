@@ -134,6 +134,11 @@ pacman -S intel-ucode
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+## MAKEPKG MultiProcessor Builds
+* `vim /etc/makepkg.conf`
+  * uncomment `#MAKEFLAGS=-j2`
+  * edit line to read: `MAKEFLAGS="-j$(nproc)"`
+
 ## User
 * `pacman -S sudo`
 * `visudo`
