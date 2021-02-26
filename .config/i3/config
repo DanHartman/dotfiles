@@ -32,6 +32,9 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 # kill focused window
 
+bindsym $mod+Shift+s exec flameshot & flameshot gui
+# take a screenshot
+
 bindsym $mod+d exec dmenu_run -fn 'Droid Sans Mono:normal:pixelsize=32'
 # start dmenu (a program launcher)
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -117,7 +120,7 @@ bindsym $mod+Shift+c reload
 # reload the configuration file
 bindsym $mod+Shift+r restart
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit' --font 'pango:Droid Sans Mono 20'"
 # exit i3 (logs you out of your X session)
 
 # audio
