@@ -29,6 +29,11 @@ yay -S google-chrome
 sudo xdg-mime default google-chrome-stable.desktop x-scheme-handler/http
 sudo xdg-mime default google-chrome-stable.desktop x-scheme-handler/https
 sudo xdg-mime default google-chrome-stable.desktop text/ht
+cat <<EOF > "${HOME}/.local/share/applications/mimeapps.list"
+x-scheme-handler/http=google-chrome-stable.desktop
+x-scheme-handler/https=google-chrome-stable.desktop
+text/ht=google-chrome-stable.desktop
+EOF
 
 echo "shell"
 yay -S zsh alacritty
