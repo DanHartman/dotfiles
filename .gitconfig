@@ -4,6 +4,3 @@
 
 [core]
   excludesfile = /home/hrtmn/.gitignore_global
-
-[pull]
-	rebase = true
