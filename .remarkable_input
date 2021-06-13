@@ -54,8 +54,8 @@ usb_connected () {
 # or find it on the network
 # or bail
 # nmap -sP 192.168.1.* >/dev/null 2>&1
+# net_connected && IP=$(net_ip) || \
 usb_connected && IP=${USB_IP} || \
-net_connected && IP=$(net_ip) || \
 bail "remarkable device not found"
 
 # --event-file "/dev/input/event0"   The path on the tablet from which to read evdev events. Probably don't change this. (default "/dev/input/event0")
