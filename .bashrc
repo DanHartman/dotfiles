@@ -41,29 +41,34 @@ function validate_version_and_get_tool() {
   : "${TEST_METHOD?"expected variable \${TEST_METHOD} to be set"}"
   : "${VALID_OUTPUT?"expected variable \${VALID_OUTPUT} to be set"}"
   : "${EXPECTATION?"expected variable \${EXPECTATION} to be set"}"
+  : "${UNPACK?"expected variable \${UNPACK} to be set"}"
   : "${!1?"expected variable ${1} to be set, pass the name of the variable that has the path to the versioned tool"}"
   : "${!2?"expected variable ${2} to be set, pass the name of the version variable for the target tool"}"
   : "${URL?"expected variable \${URL} to be set"}"
 
+  # decay the indirection to named variables
+  ABSOLUTE_PATH_TO_TOOL="${!1}"
+  VERSION="${!2}"
+
   # fail if the VERSION passed does not meet format EXPECTATION
-  test "$(echo "${!2}" | ${TEST_METHOD})" = "${VALID_OUTPUT}" || {
-    echo "${2} ${EXPECTATION}, received ${!2}" 1>&2
+  test "$(echo "${VERSION}" | ${TEST_METHOD})" = "${VALID_OUTPUT}" || {
+    echo "${2} ${EXPECTATION}, received ${VERSION}" 1>&2
     return 1
   }
 
   # fail if the VERSION passed is not contained within VERSION_LIST
-  grep "${!2}" <<< "${VERSION_LIST}" -q 2>&1 > /dev/null || {
-    echo "${2} '${!2}' not found in VERSION_LIST '${VERSION_LIST}'" 1>&2
-    echo "${2} '${!2}' is invalid" 1>&2
+  grep "${VERSION}" <<< "${VERSION_LIST}" -q 2>&1 > /dev/null || {
+    echo "${2} '${VERSION}' not found in VERSION_LIST '${VERSION_LIST}'" 1>&2
+    echo "${2} '${VERSION}' is invalid" 1>&2
     return 1
   }
 
-  test -e "${!1}" || {
+  test -e "${ABSOLUTE_PATH_TO_TOOL}" || {
     # create the directory in which the executable will reside
-    test -d "$(dirname ${!1})" || mkdir -p "$(dirname ${!1})"
+    test -d "$(dirname ${ABSOLUTE_PATH_TO_TOOL})" || mkdir -p "$(dirname ${ABSOLUTE_PATH_TO_TOOL})"
 
     # download the given URL
-    curl -L "$(envsubst <<< "${URL}")" > "${!1}"
+    curl -L "$(envsubst <<< "${URL}")" > "${ABSOLUTE_PATH_TO_TOOL}"
 
     # unpack download
     eval "$(echo "${UNPACK}" | envsubst)"
