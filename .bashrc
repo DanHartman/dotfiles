@@ -32,6 +32,12 @@ EOF
 }
 
 function validate_version_and_get_tool() {
+  # a note on the ${UNPACK} logic
+  # tar, by default, will extract files into the current working directory
+  # to avoid leaving messes around, or ${UNPACK} logic that moves files around
+  # try the -C flag!
+  # tar -C "$(dirname ${APP})" -zxf "${APP}"
+
   test "$#" -eq 2 || {
     echo "function validate_version_and_get_tool() expects 2 arguments" 1>&2
     return 1
