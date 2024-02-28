@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+DIR="$( cd "$( dirname "${0}" )" >/dev/null 2>&1 && pwd )"
+PATH=${PATH}:${DIR}
+SCRIPT_NAME=$(basename "$0")
+
+# password value is found in the
+# settings menu under --> Help --> Copyrights and licenses
+# password will be near the bottom of the page.
+# If you have an older tablet that has not been updated
+# to the latest software then your password may be found
+# in the About tab of the tablet menu at the bottom
+# of the General Information section.
+PASS="ItiQqhAQlv"
+
+# This is the default 'web IP' that presents
+# itself when remarkable is connected via USB
+USB_IP="10.11.99.1"
+
+# I think I looked at my router to get the
+# mac address.  It may also be printed on
+# the product box?
+MAC="b0:f1:ec:59:e3:56"
+
+bail () {
+  printf "%s\n" "${1}" 1>&2
+  exit 1
+}
+
+# check for root privileges
+test $(id -u) -ne 0 && bail "${SCRIPT_NAME} must be run as root"
+
+if ! command -v remouseable >/dev/null 2>&1; then
+  BASE_URL="https://github.com/kevinconway/remouseable"
+  VERSION="0.4.0"
+  REMOUSABLE_DL_URL="${BASE_URL}/releases/download/v${VERSION}/linux"
+  wget -O - ${REMOUSABLE_DL_URL} > /usr/local/bin/remouseable
+  chmod +x /usr/local/bin/remouseable
+fi
+
+
+net_connected () {
+  ip neighbor | grep -i ${MAC} >/dev/null 2>&1
+}
+net_ip () {
+  ip neighbor | grep -i ${MAC} | awk '{ print $1 }'
+}
+usb_connected () {
+  nc -w 1 -z ${USB_IP} 22
+}
+
+# scan ports before searching for device
+# use usb connection if found
+# or find it on the network
+# or bail
+# nmap -sP 192.168.1.* >/dev/null 2>&1
+# net_connected && IP=$(net_ip) || \
+usb_connected && IP=${USB_IP} || \
+bail "remarkable device not found"
+
+# --event-file "/dev/input/event0"   The path on the tablet from which to read evdev events. Probably don't change this. (default "/dev/input/event0")
+# --orientation "right"             Orientation of the tablet. Choices are vertical, right, and left (default "right")
+# --pressure-threshold 1000         Change the click detection sensitivity. 1000 is when the pen makes contact with the tablet. Set higher to require more pen pressure for a click. (default 1000)
+# --ssh-ip "${IP:-10.11.99.1}:22"   The host and port of a tablet. (default "10.11.99.1:22")
+# --ssh-password "${PASS}"          An optional password to use when ssh-ing into the tablet. Use - for a prompt rather than entering a value. If not given then public/private keypair authentication is used.
+# --ssh-user "${USER:-root}"        The ssh username to use when logging into the tablet. (default "root")
+remouseable \
+  --event-file "/dev/input/event0" \
+  --orientation "right" \
+  --pressure-threshold 1000 \
+  --ssh-ip "${IP:-10.11.99.1}:22" \
+  --ssh-password "${PASS}" \
+  --ssh-user "root"

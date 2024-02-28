@@ -1,0 +1,9 @@
+[user]
+	email = dan@scaleout.team
+	name = Dan Hartman
+
+[core]
+  excludesfile = /home/hrtmn/.gitignore_global
+
+[diff "ansible-vault"]
+	textconv = ansible-vault view

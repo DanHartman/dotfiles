@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+scan() {
+  nmcli device wifi list --rescan yes
+}
+
+connect() {
+  : "${SSID?"set SSID and re-run ${DIR}/$(basename "$0") connect"}"
+  nmcli device wifi connect "${SSID}" "$@"
+}
+
+"$@"
