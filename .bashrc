@@ -230,7 +230,7 @@ function trivy() {
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
-  UNPACK='tar -zxf "${TRIVY}" && mv trivy "${TRIVY}" && chmod +x "${TRIVY}"' \
+  UNPACK='tar -C "$(dirname ${TRIVY})" -zxf "${TRIVY}" && chmod +x "${TRIVY}"' \
   URL='https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz' \
   validate_version_and_get_tool "TRIVY" "TRIVY_VERSION" && "${TRIVY}" "$@"
 }
