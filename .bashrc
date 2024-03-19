@@ -97,14 +97,14 @@ function jq() {
   validate_version_and_get_tool "JQ" "JQ_VERSION" && "${JQ}" "$@"
 }
 
-export YQ_VERSION="${YQ_VERSION:-4.33.3}"
+export YQ_VERSION="${YQ_VERSION:-4.42.1}"
 function yq() {
   export YQ="${HOME}/yq/${YQ_VERSION}/yq"
   PATH_YQ="${HOME}/.local/bin/yq"
   test -f "${PATH_YQ}" || make_entrypoint 'yq "$@"' > "${PATH_YQ}"
   test -x "${PATH_YQ}" || chmod +x "${PATH_YQ}"
 
-  VERSION_LIST="4.40.4 4.33.3 4.5.0" \
+  VERSION_LIST="4.42.1 4.40.4 4.33.3 4.5.0" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
@@ -129,14 +129,14 @@ function kubectl() {
   validate_version_and_get_tool "KUBECTL" "KUBECTL_VERSION" && "${KUBECTL}" "$@"
 }
 
-export ISTIOCTL_VERSION="${ISTIOCTL_VERSION:-1.17.2}"
+export ISTIOCTL_VERSION="${ISTIOCTL_VERSION:-1.21.0}"
 function istioctl() {
   export ISTIOCTL="${HOME}/istioctl/${ISTIOCTL_VERSION}/istioctl"
   PATH_ISTIOCTL="${HOME}/.local/bin/istioctl"
   test -f "${PATH_ISTIOCTL}" || make_entrypoint 'istioctl "$@"' > "${PATH_ISTIOCTL}"
   test -x "${PATH_ISTIOCTL}" || chmod +x "${PATH_ISTIOCTL}"
 
-  VERSION_LIST="1.17.2 1.16.4 1.15.7" \
+  VERSION_LIST="1.21.0 1.17.2 1.16.4 1.15.7" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
@@ -161,14 +161,14 @@ function terraform() {
   validate_version_and_get_tool "TERRAFORM" "TERRAFORM_VERSION" && "${TERRAFORM}" "$@"
 }
 
-export MESHCTL_VERSION="${MESHCTL_VERSION:-2.3.3}"
+export MESHCTL_VERSION="${MESHCTL_VERSION:-2.5.4}"
 function meshctl() {
   export MESHCTL="${HOME}/meshctl/${MESHCTL_VERSION}/meshctl"
   PATH_MESHCTL="${HOME}/.local/bin/meshctl"
   test -f "${PATH_MESHCTL}" || make_entrypoint 'meshctl "$@"' > "${PATH_MESHCTL}"
   test -x "${PATH_MESHCTL}" || chmod +x "${PATH_MESHCTL}"
 
-  VERSION_LIST="2.3.3 2.3.2 2.3.1 2.3.0 2.2.8 2.2.7 2.2.6 2.2.5 2.2.4 2.2.3 2.2.2 2.2.1 2.2.0" \
+  VERSION_LIST="2.5.4 2.5.1 2.3.3 2.3.2 2.3.1 2.3.0 2.2.8 2.2.7 2.2.6 2.2.5 2.2.4 2.2.3 2.2.2 2.2.1 2.2.0" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
