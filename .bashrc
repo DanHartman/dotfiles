@@ -240,3 +240,19 @@ function trivy() {
   URL='https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz' \
   validate_version_and_get_tool "TRIVY" "TRIVY_VERSION" && "${TRIVY}" "$@"
 }
+
+export KUSTOMIZE_VERSION="${KUSTOMIZE_VERSION:-5.4.1}"
+function kustomize() {
+  export KUSTOMIZE="${HOME}/kustomize/${KUSTOMIZE_VERSION}/kustomize"
+  PATH_KUSTOMIZE="${HOME}/.local/bin/kustomize"
+  test -f "${PATH_KUSTOMIZE}" || make_entrypoint 'kustomize "$@"' > "${PATH_KUSTOMIZE}"
+  test -x "${PATH_KUSTOMIZE}" || chmod +x "${PATH_KUSTOMIZE}"
+
+  VERSION_LIST="5.4.1" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname ${KUSTOMIZE})" -zxf "${KUSTOMIZE}" && chmod +x "${KUSTOMIZE}"' \
+  URL='https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz'
+  validate_version_and_get_tool "KUSTOMIZE" "KUSTOMIZE_VERSION" && "${KUSTOMIZE}" "$@"
+}
