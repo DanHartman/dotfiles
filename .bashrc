@@ -256,3 +256,19 @@ function kustomize() {
   URL='https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz' \
   validate_version_and_get_tool "KUSTOMIZE" "KUSTOMIZE_VERSION" && "${KUSTOMIZE}" "$@"
 }
+
+export ARGOCD_VERSION="${ARGOCD_VERSION:-2.11.0}"
+function argocd() {
+  export ARGOCD="${HOME}/argocd/${ARGOCD_VERSION}/argocd"
+  PATH_ARGOCD="${HOME}/.local/bin/argocd"
+  test -f "${PATH_ARGOCD}" || make_entrypoint 'argocd "$@"' > "${PATH_ARGOCD}"
+  test -x "${PATH_ARGOCD}" || chmod +x "${PATH_ARGOCD}"
+
+  VERSION_LIST="2.11.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='chmod +x "${ARGOCD}"' \
+  URL='https://github.com/argoproj/argo-cd/releases/download/v2.11.0/argocd-linux-amd64' \
+  validate_version_and_get_tool "ARGOCD" "ARGOCD_VERSION" && "${ARGOCD}" "$@"
+}
