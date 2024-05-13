@@ -104,7 +104,7 @@ function yq() {
   test -f "${PATH_YQ}" || make_entrypoint 'yq "$@"' > "${PATH_YQ}"
   test -x "${PATH_YQ}" || chmod +x "${PATH_YQ}"
 
-  VERSION_LIST="4.42.1 4.40.4 4.33.3 4.5.0" \
+  VERSION_LIST="4.42.1 4.40.4 4.33.3 4.23.1 4.5.0" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
@@ -200,7 +200,7 @@ function spruce() {
   test -f "${PATH_SPRUCE}" || make_entrypoint 'spruce "$@"' > "${PATH_SPRUCE}"
   test -x "${PATH_SPRUCE}" || chmod +x "${PATH_SPRUCE}"
 
-  VERSION_LIST="1.31.0 1.30.2 1.25.3" \
+  VERSION_LIST="1.31.0 1.30.2 1.29.0 1.25.3" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
