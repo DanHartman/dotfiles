@@ -253,6 +253,6 @@ function kustomize() {
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${KUSTOMIZE})" -zxf "${KUSTOMIZE}" && chmod +x "${KUSTOMIZE}"' \
-  URL='https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz'
+  URL='https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz' \
   validate_version_and_get_tool "KUSTOMIZE" "KUSTOMIZE_VERSION" && "${KUSTOMIZE}" "$@"
 }
