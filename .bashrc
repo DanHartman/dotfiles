@@ -152,7 +152,7 @@ function terraform() {
   test -f "${PATH_TERRAFORM}" || make_entrypoint 'terraform "$@"' > "${PATH_TERRAFORM}"
   test -x "${PATH_TERRAFORM}" || chmod +x "${PATH_TERRAFORM}"
 
-  VERSION_LIST="1.8.0 1.6.6 1.4.6 1.0.11" \
+  VERSION_LIST="1.8.0 1.6.6 1.6.1 1.4.6 1.0.11 0.11.8" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
