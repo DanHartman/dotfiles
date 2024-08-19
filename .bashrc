@@ -152,7 +152,7 @@ function terraform() {
   test -f "${PATH_TERRAFORM}" || make_entrypoint 'terraform "$@"' > "${PATH_TERRAFORM}"
   test -x "${PATH_TERRAFORM}" || chmod +x "${PATH_TERRAFORM}"
 
-  VERSION_LIST="1.8.0 1.6.6 1.6.1 1.4.6 1.0.11 0.11.8" \
+  VERSION_LIST="1.8.0 1.6.6 1.6.2 1.6.1 1.4.6 1.0.11 0.11.8" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
@@ -271,4 +271,20 @@ function argocd() {
   UNPACK='chmod +x "${ARGOCD}"' \
   URL='https://github.com/argoproj/argo-cd/releases/download/v2.11.0/argocd-linux-amd64' \
   validate_version_and_get_tool "ARGOCD" "ARGOCD_VERSION" && "${ARGOCD}" "$@"
+}
+
+export CMCTL_VERSION="${CMCTL_VERSION:-2.1.0}"
+function cmctl() {
+  export CMCTL="${HOME}/cmctl/${CMCTL_VERSION}/cmctl"
+  PATH_CMCTL="${HOME}/.local/bin/cmctl"
+  test -f "${PATH_CMCTL}" || make_entrypoint 'cmctl "$@"' > "${PATH_CMCTL}"
+  test -x "${PATH_CMCTL}" || chmod +x "${PATH_CMCTL}"
+
+  VERSION_LIST="2.1.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='chmod +x "${CMCTL}"' \
+  URL='https://github.com/cert-manager/cmctl/releases/download/v${CMCTL_VERSION}/cmctl_linux_amd64' \
+  validate_version_and_get_tool "CMCTL" "CMCTL_VERSION" && "${CMCTL}" "$@"
 }
