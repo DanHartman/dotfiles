@@ -288,3 +288,19 @@ function cmctl() {
   URL='https://github.com/cert-manager/cmctl/releases/download/v${CMCTL_VERSION}/cmctl_linux_amd64' \
   validate_version_and_get_tool "CMCTL" "CMCTL_VERSION" && "${CMCTL}" "$@"
 }
+
+export GH_VERSION="${GH_VERSION:-2.55.0}"
+function gh() {
+  export GH="${HOME}/gh/${GH_VERSION}/gh"
+  PATH_GH="${HOME}/.local/bin/gh"
+  test -f "${PATH_GH}" || make_entrypoint 'gh "$@"' > "${PATH_GH}"
+  test -x "${PATH_GH}" || chmod +x "${PATH_GH}"
+
+  VERSION_LIST="2.55.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname ${GH})" -zxf "${GH}" && ls -la "${GH}" && cp "$(dirname ${GH})/gh_${GH_VERSION}_linux_amd64/bin/gh" "${GH}" && chmod +x "${GH}"' \
+  URL='https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz' \
+  validate_version_and_get_tool "GH" "GH_VERSION" && "${GH}" "$@"
+}
