@@ -81,14 +81,14 @@ function validate_version_and_get_tool() {
   }
 }
 
-export JQ_VERSION="${JQ_VERSION:-1.6}"
+export JQ_VERSION="${JQ_VERSION:-1.7}"
 function jq() {
   export JQ="${HOME}/jq/${JQ_VERSION}/jq"
   PATH_JQ="${HOME}/.local/bin/jq"
   test -f "${PATH_JQ}" || make_entrypoint 'jq "$@"' > "${PATH_JQ}"
   test -x "${PATH_JQ}" || chmod +x "${PATH_JQ}"
 
-  VERSION_LIST="1.5 1.6" \
+  VERSION_LIST="1.5 1.6 1.7" \
   EXPECTATION='must be in format of X.Y' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='.' \
