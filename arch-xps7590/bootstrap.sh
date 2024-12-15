@@ -10,7 +10,7 @@ echo "utils"
 yay -S curl wget rsync xdg-utils htop openssh inetutils
 
 echo "can I get a desktop?"
-yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu xf86-input-libinput feh flameshot
+yay -S i3-wm i3status xorg-xinit rofi xorg-server dmenu xf86-input-libinput feh flameshot autorandr
 mkdir -p ${HOME}/Pictures
 mkdir -p ${HOME}/Pictures/Screenshots
 curl "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg" > ${HOME}/Pictures/wallpaper.jpg
@@ -36,7 +36,7 @@ echo "chat"
 yay -S zoom signal-desktop slack-desktop
 
 echo "dev"
-yay -S jq go docker docker-compose xclip code
+yay -S go docker docker-compose xclip code
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo gpasswd -a "${USER}" docker

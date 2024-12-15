@@ -172,7 +172,25 @@ exit
 ```
 
 ## Powertop
-`pacman -S powertop`
+```sh
+# install package
+pacman -S powertop
+
+# run auto-tune on boot
+cat <<'EOF' > /etc/systemd/system/powertop.service
+[Unit]
+Description=Powertop tunings
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/powertop --auto-tune
+ExecStartPost=/bin/sh -c 'for f in $(grep -l "Mouse" /sys/bus/usb/devices/*/product | sed "s/product/power\\/control/"); do echo on >| "$f"; done'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
 
 ## Dotfiles
 ```sh
