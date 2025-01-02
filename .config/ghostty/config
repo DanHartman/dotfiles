@@ -1,0 +1,5 @@
+background = 000000
+font-family = Droid Sans Mono
+window-decoration = false
+theme = Breeze
+window-theme = dark
