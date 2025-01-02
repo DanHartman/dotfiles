@@ -26,7 +26,7 @@ font pango:Droid Sans Mono 20
 floating_modifier $mod
 # Use Mouse+$mod to drag floating windows to their wanted position
 
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec ghostty
 # start a terminal
 
 bindsym $mod+Shift+q kill

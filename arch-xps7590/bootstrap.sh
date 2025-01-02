@@ -28,6 +28,7 @@ echo "browsers"
 yay -S google-chrome
 
 echo "shell"
+sudo pacman -Sy ghostty
 yay -S zsh alacritty
 test -d ~/liquidprompt && rm -rf ~/liquidprompt
 cd ~ && git clone https://github.com/nojhan/liquidprompt.git
