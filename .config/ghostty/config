@@ -1,5 +1,11 @@
+theme = Desert
+
+palette = 12=#de9a4b
+palette = 14=#369432
+
 background = 000000
+foreground = ffffff
+
 font-family = Droid Sans Mono
 window-decoration = false
-theme = Breeze
 window-theme = dark
