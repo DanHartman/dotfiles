@@ -29,7 +29,7 @@ function make_entrypoint() {
   cat <<EOF
 #!/usr/bin/env bash
 
-source "\${HOME}/.bashrc"
+source "${HOME}/.bashrc"
 $@
 EOF
 }
