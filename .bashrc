@@ -12,18 +12,43 @@ alias pbcopy='xclip -sel clip'
 alias pbpaste='xclip -o -sel clip'
 alias wifiscan="${HOME}/.wifi scan"
 alias wificonnect="${HOME}/.wifi connect"
-alias unifirestart="aws ec2 reboot-instances --instance-ids i-0a8d8fb0349abfa8e"
 alias gmod="git status | grep modified | awk '{ print \$NF }'"
 alias gadd="xargs -n 1 git add"
 
 export EDITOR=vim
 export PATH="${HOME}/go/bin:${PATH}"
-
-test -d "${HOME}/.local/bin" || mkdir -p "${HOME}/.local/bin"
-export PATH="${HOME}/.local/bin:${PATH}"
-
 export PATH="/opt/zig:${PATH}"
 export BUILDKIT_PROGRESS="plain"
+
+# ****************************************************************************
+# custom package manager
+#
+# this convoluted series of abstractions are to support two
+# primary design goals
+# - transparency into dependency version
+# - the ability to select an arbitrary version of the dependency at run time
+#       $ diff <(JQ_VERSION=1.5 jq --version) <(JQ_VERSION=1.7 jq --version)
+#       1c1
+#       < jq-1.5
+#       ---
+#       > jq-1.7
+# - this is accomplished by creating shell functions that share the same name
+#   as the desired executable.
+#       $ type jq
+#       jq is a function
+#       jq ()
+#       {
+#         ...
+# - the function is "sourced" into the operator's environment
+# - the first time the function is called it authors an entrypoint script,
+#   validates the version of the executable(as set via env var), downloads
+#   the version of the tool specified if not present, then passes all the
+#   arguments received by the function TO the executable
+# - updates to the version list allow new versions and the ability to run
+#   multiple versions of the same tool side by side
+# ****************************************************************************
+test -d "${HOME}/.local/bin" || mkdir -p "${HOME}/.local/bin"
+export PATH="${HOME}/.local/bin:${PATH}"
 
 function make_entrypoint() {
   cat <<EOF
