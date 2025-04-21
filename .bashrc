@@ -307,3 +307,19 @@ function gh() {
   URL='https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz' \
   validate_version_and_get_tool "GH" "GH_VERSION" && "${GH}" "$@"
 }
+
+export SNX_RS_VERSION="${SNX_RS_VERSION:-3.1.2}"
+function snx-rs() {
+  export SNX_RS="${HOME}/snx-rs/${SNX_RS_VERSION}/snx-rs"
+  PATH_SNX_RS="${HOME}/.local/bin/snx-rs"
+  test -f "${PATH_SNX_RS}" || make_entrypoint 'snx-rs "$@"' > "${PATH_SNX_RS}"
+  test -x "${PATH_SNX_RS}" || chmod +x "${PATH_SNX_RS}"
+
+  VERSION_LIST="3.1.2" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname ${SNX_RS})" --xz -xf "${SNX_RS}" && ls -la "${SNX_RS}" && cp "$(dirname ${SNX_RS})/snx-rs-v${SNX_RS_VERSION}-linux-x86_64/snx-rs" "${SNX_RS}" && chmod +x "${SNX_RS}"' \
+  URL='https://github.com/ancwrd1/snx-rs/releases/download/v${SNX_RS_VERSION}/snx-rs-v${SNX_RS_VERSION}-linux-x86_64.tar.xz' \
+  validate_version_and_get_tool "SNX_RS" "SNX_RS_VERSION" && "${SNX_RS}" "$@"
+}
