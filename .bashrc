@@ -1,4 +1,5 @@
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
+test -d ~/liquidprompt || git clone https://github.com/liquidprompt/liquidprompt.git ~/liquidprompt
 [[ $- = *i* ]] && source ~/liquidprompt/liquidprompt
 
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
