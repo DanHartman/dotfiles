@@ -33,6 +33,9 @@ yay -S zsh alacritty
 test -d ~/liquidprompt && rm -rf ~/liquidprompt
 cd ~ && git clone https://github.com/nojhan/liquidprompt.git
 
+echo "get good"
+yay -S baca-ereader-git
+
 echo "chat"
 yay -S zoom signal-desktop slack-desktop
 
