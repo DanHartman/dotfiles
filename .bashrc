@@ -349,3 +349,19 @@ function snx-rs() {
   URL='https://github.com/ancwrd1/snx-rs/releases/download/v${SNX_RS_VERSION}/snx-rs-v${SNX_RS_VERSION}-linux-x86_64.tar.xz' \
   validate_version_and_get_tool "SNX_RS" "SNX_RS_VERSION" && "${SNX_RS}" "$@"
 }
+
+export GRYPE_VERSION="${GRYPE_VERSION:-0.92.0}"
+function grype() {
+  export GRYPE="${HOME}/grype/${GRYPE_VERSION}/grype"
+  PATH_GRYPE="${HOME}/.local/bin/grype"
+  test -f "${PATH_GRYPE}" || make_entrypoint 'grype "$@"' > "${PATH_GRYPE}"
+  test -x "${PATH_GRYPE}" || chmod +x "${PATH_GRYPE}"
+
+  VERSION_LIST="0.92.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname ${GRYPE})" -xzf "${GRYPE}"' \
+  URL='https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz' \
+  validate_version_and_get_tool "GRYPE" "GRYPE_VERSION" && "${GRYPE}" "$@"
+}
