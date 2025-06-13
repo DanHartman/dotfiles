@@ -126,14 +126,14 @@ function jq() {
   validate_version_and_get_tool "JQ" "JQ_VERSION" && "${JQ}" "$@"
 }
 
-export YQ_VERSION="${YQ_VERSION:-4.42.1}"
+export YQ_VERSION="${YQ_VERSION:-4.45.1}"
 function yq() {
   export YQ="${HOME}/yq/${YQ_VERSION}/yq"
   PATH_YQ="${HOME}/.local/bin/yq"
   test -f "${PATH_YQ}" || make_entrypoint 'yq "$@"' > "${PATH_YQ}"
   test -x "${PATH_YQ}" || chmod +x "${PATH_YQ}"
 
-  VERSION_LIST="4.42.1 4.40.4 4.33.3 4.23.1 4.5.0" \
+  VERSION_LIST="4.45.1 4.42.1 4.40.4 4.33.3 4.23.1 4.5.0" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
