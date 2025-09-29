@@ -142,14 +142,14 @@ function yq() {
   validate_version_and_get_tool "YQ" "YQ_VERSION" && "${YQ}" "$@"
 }
 
-export KUBECTL_VERSION="${KUBECTL_VERSION:-1.28.0}"
+export KUBECTL_VERSION="${KUBECTL_VERSION:-1.31.0}"
 function kubectl() {
   export KUBECTL="${HOME}/kubectl/${KUBECTL_VERSION}/kubectl"
   PATH_KUBECTL="${HOME}/.local/bin/kubectl"
   test -f "${PATH_KUBECTL}" || make_entrypoint 'kubectl "$@"' > "${PATH_KUBECTL}"
   test -x "${PATH_KUBECTL}" || chmod +x "${PATH_KUBECTL}"
 
-  VERSION_LIST="1.22.0 1.23.0 1.24.0 1.25.0 1.26.0 1.27.0 1.28.0" \
+  VERSION_LIST="1.22.0 1.23.0 1.24.0 1.25.0 1.26.0 1.27.0 1.28.0 1.29.0 1.30.0 1.31.0 1.32.0 1.32.9 1.33.1 1.34.1" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d [:alnum:]' \
   VALID_OUTPUT='..' \
