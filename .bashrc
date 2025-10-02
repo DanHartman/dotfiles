@@ -365,3 +365,19 @@ function grype() {
   URL='https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz' \
   validate_version_and_get_tool "GRYPE" "GRYPE_VERSION" && "${GRYPE}" "$@"
 }
+
+export MARP_VERSION="${MARP_VERSION:-4.2.3}"
+function marp() {
+  export MARP="${HOME}/marp/${MARP_VERSION}/marp"
+  PATH_MARP="${HOME}/.local/bin/marp"
+  test -f "${PATH_MARP}" || make_entrypoint 'marp "$@"' > "${PATH_MARP}"
+  test -x "${PATH_MARP}" || chmod +x "${PATH_MARP}"
+
+  VERSION_LIST="4.2.3" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d [:alnum:]' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname ${MARP})" -xzf "${MARP}"' \
+  URL='https://github.com/marp-team/marp-cli/releases/download/v${MARP_VERSION}/marp-cli-v${MARP_VERSION}-linux.tar.gz' \
+  validate_version_and_get_tool "MARP" "MARP_VERSION" && "${MARP}" "$@"
+}
