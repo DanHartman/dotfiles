@@ -163,3 +163,26 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+gaps outer 0px
+
+# indirectly address workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+
+# append_layout reads from a json file that defines which applications
+# a desktop should "swallow"
+exec --no-startup-id i3-msg 'workspace $ws1; append_layout ~/.config/i3/workspace1.json'
+exec --no-startup-id i3-msg 'workspace $ws2; append_layout ~/.config/i3/workspace2.json'
+exec --no-startup-id i3-msg 'workspace $ws3; append_layout ~/.config/i3/workspace3.json'
+exec --no-startup-id i3-msg 'workspace $ws4; append_layout ~/.config/i3/workspace4.json'
+
+# swallowing != starting, launch the apps!
+exec --no-startup-id i3-msg 'workspace $ws1; exec google-chrome-stable'
+exec --no-startup-id i3-msg 'workspace $ws1; exec code'
+exec --no-startup-id i3-msg 'workspace $ws1; exec ghostty'
+exec --no-startup-id i3-msg 'workspace $ws1; exec teams-for-linux'
+exec --no-startup-id i3-msg 'workspace $ws1; exec outlook-for-linux'
+exec --no-startup-id i3-msg 'workspace $ws1; exec slack'

@@ -1,0 +1,27 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "none",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "fullscreen_mode": 1,
+    "geometry": {
+       "height": 2122,
+       "width": 800,
+       "x": 2304,
+       "y": 0
+    },
+    "marks": [],
+    "name": "code code code",
+    "percent": 1,
+    "swallows": [
+       {
+         "class": "^code\\-oss$",
+         "instance": "^code\\-oss$"
+       // "machine": "^riker$",
+       // "title": "^config\\ \\-\\ Code\\ \\-\\ OSS$",
+       // "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+

@@ -1,0 +1,97 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2084,
+       "width": 1916,
+       "x": 1922,
+       "y": 36
+    },
+    "marks": [],
+    "name": "general (Channel) - Scaleout - 1 new item - Slack",
+    "percent": 0.6,
+    "swallows": [
+       {
+         "class": "^Slack$",
+         "instance": "^slack$"
+       // "machine": "^riker$",
+       // "title": "^general\\ \\(Channel\\)\\ \\-\\ Scaleout\\ \\-\\ 1\\ new\\ item\\ \\-\\ Slack$",
+       // "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 2 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 0.4,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 1 children
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 0.5,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 1200,
+                       "width": 1600,
+                       "x": 1120,
+                       "y": 480
+                    },
+                    "marks": [],
+                    "name": "(2) Calendar | Calendar | Microsoft Teams",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                         "class": "^teams\\-for\\-linux$",
+                         "instance": "^teams\\-for\\-linux$"
+                       // "machine": "^riker$",
+                       // "title": "^\\(2\\)\\ Calendar\\ \\|\\ Calendar\\ \\|\\ Microsoft\\ Teams$",
+                       // "window_role": "^browser\\-window$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "normal",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 2084,
+               "width": 1916,
+               "x": 2,
+               "y": 36
+            },
+            "marks": [],
+            "name": "Mail - Hartman, Dan - Outlook",
+            "percent": 0.5,
+            "swallows": [
+               {
+                 "class": "^outlook\\-for\\-linux$",
+                 "instance": "^outlook\\-for\\-linux$"
+               // "machine": "^riker$",
+               // "title": "^Mail\\ \\-\\ Hartman\\,\\ Dan\\ \\-\\ Outlook$",
+               // "window_role": "^browser\\-window$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+

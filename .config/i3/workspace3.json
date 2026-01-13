@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "none",
+    "current_border_width": 0,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1200,
+       "width": 2000,
+       "x": 0,
+       "y": 0
+    },
+    "marks": [],
+    "name": "terminal time",
+    "percent": 1,
+    "swallows": [
+       {
+         "class": "^com\\.mitchellh\\.ghostty$",
+         "instance": "^ghostty$"
+         // "machine": "^riker$",
+         // "title": "^i3\\-save\\-tree\\ \\-\\-workspace\\ 3\\ \\>\\ \\.config\\/i3\\/workspace3\\.json$"
+       }
+    ],
+    "type": "con"
+}
+
