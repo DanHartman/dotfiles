@@ -19,6 +19,7 @@ alias gadd="xargs -n 1 git add"
 export EDITOR=vim
 export PATH="${HOME}/go/bin:${PATH}"
 export PATH="/opt/zig:${PATH}"
+export PATH="/opt/outlook-for-linux:${PATH}"
 export BUILDKIT_PROGRESS="plain"
 
 # ****************************************************************************
