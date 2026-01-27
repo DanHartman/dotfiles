@@ -143,7 +143,7 @@ function yq() {
   validate_version_and_get_tool "YQ" "YQ_VERSION" && "${YQ}" "$@"
 }
 
-export KUBECTL_VERSION="${KUBECTL_VERSION:-1.31.0}"
+export KUBECTL_VERSION="${KUBECTL_VERSION:-1.33.0}"
 function kubectl() {
   export KUBECTL="${HOME}/kubectl/${KUBECTL_VERSION}/kubectl"
   PATH_KUBECTL="${HOME}/.local/bin/kubectl"
