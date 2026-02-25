@@ -120,30 +120,30 @@ function jq() {
 
   VERSION_LIST="1.5 1.6 1.7" \
   EXPECTATION='must be in format of X.Y' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='.' \
   UNPACK='chmod +x "${JQ}"' \
   URL='https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64' \
   validate_version_and_get_tool "JQ" "JQ_VERSION" && "${JQ}" "$@"
 }
 
-export YQ_VERSION="${YQ_VERSION:-4.45.1}"
+export YQ_VERSION="${YQ_VERSION:-4.52.2}"
 function yq() {
   export YQ="${HOME}/yq/${YQ_VERSION}/yq"
   PATH_YQ="${HOME}/.local/bin/yq"
   test -f "${PATH_YQ}" || make_entrypoint 'yq "$@"' > "${PATH_YQ}"
   test -x "${PATH_YQ}" || chmod +x "${PATH_YQ}"
 
-  VERSION_LIST="4.45.1 4.42.1 4.40.4 4.33.3 4.23.1 4.5.0" \
+  VERSION_LIST="4.52.2 4.45.1 4.42.1 4.40.4 4.33.3 4.23.1 4.5.0" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${YQ}"' \
   URL='https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_386' \
   validate_version_and_get_tool "YQ" "YQ_VERSION" && "${YQ}" "$@"
 }
 
-export KUBECTL_VERSION="${KUBECTL_VERSION:-1.33.0}"
+export KUBECTL_VERSION="${KUBECTL_VERSION:-1.34.1}"
 function kubectl() {
   export KUBECTL="${HOME}/kubectl/${KUBECTL_VERSION}/kubectl"
   PATH_KUBECTL="${HOME}/.local/bin/kubectl"
@@ -152,7 +152,7 @@ function kubectl() {
 
   VERSION_LIST="1.22.0 1.23.0 1.24.0 1.25.0 1.26.0 1.27.0 1.28.0 1.29.0 1.30.0 1.31.0 1.32.0 1.32.9 1.33.1 1.34.1" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${KUBECTL}"' \
   URL='https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl' \
@@ -166,25 +166,25 @@ function istioctl() {
   test -f "${PATH_ISTIOCTL}" || make_entrypoint 'istioctl "$@"' > "${PATH_ISTIOCTL}"
   test -x "${PATH_ISTIOCTL}" || chmod +x "${PATH_ISTIOCTL}"
 
-  VERSION_LIST="1.21.0 1.17.2 1.16.4 1.15.7" \
+  VERSION_LIST="1.29.0 1.28.4 1.28.3 1.27.7 1.27.6 1.26.8 1.25.5 1.24.6 1.23.6 1.22.7 1.21.0 1.17.2 1.16.4 1.15.7" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar --directory="$(dirname ${ISTIOCTL})" -xf "${ISTIOCTL}" && mv "$(dirname $(dirname ${ISTIOCTL}))/${ISTIOCTL_VERSION}/istio-${ISTIOCTL_VERSION}/bin/istioctl" "${ISTIOCTL}" && chmod +x "${ISTIOCTL}"' \
   URL='https://github.com/istio/istio/releases/download/${ISTIOCTL_VERSION}/istio-${ISTIOCTL_VERSION}-linux-amd64.tar.gz' \
   validate_version_and_get_tool "ISTIOCTL" "ISTIOCTL_VERSION" && "${ISTIOCTL}" "$@"
 }
 
-export TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.8.0}"
+export TERRAFORM_VERSION="${TERRAFORM_VERSION:-1.14.5}"
 function terraform() {
   export TERRAFORM="${HOME}/terraform/${TERRAFORM_VERSION}/terraform"
   PATH_TERRAFORM="${HOME}/.local/bin/terraform"
   test -f "${PATH_TERRAFORM}" || make_entrypoint 'terraform "$@"' > "${PATH_TERRAFORM}"
   test -x "${PATH_TERRAFORM}" || chmod +x "${PATH_TERRAFORM}"
 
-  VERSION_LIST="1.8.0 1.6.6 1.6.2 1.6.1 1.4.6 1.0.11 0.11.8" \
+  VERSION_LIST="1.14.5 1.9.5 1.8.0 1.6.6 1.6.2 1.6.1 1.4.6 1.0.11 0.11.8" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='unzip -o -d "$(dirname ${TERRAFORM})" "${TERRAFORM}" && chmod +x "${TERRAFORM}"' \
   URL='https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip' \
@@ -200,7 +200,7 @@ function meshctl() {
 
   VERSION_LIST="2.5.4 2.5.1 2.3.3 2.3.2 2.3.1 2.3.0 2.2.8 2.2.7 2.2.6 2.2.5 2.2.4 2.2.3 2.2.2 2.2.1 2.2.0" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${MESHCTL}"' \
   URL='https://storage.googleapis.com/meshctl/v${MESHCTL_VERSION}/meshctl-linux-amd64' \
@@ -216,7 +216,7 @@ function helm() {
 
   VERSION_LIST="3.12.0 3.11.3 3.10.3" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -zxf "${HELM}" && mv linux-amd64/helm "${HELM}"' \
   URL='https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz' \
@@ -232,7 +232,7 @@ function spruce() {
 
   VERSION_LIST="1.31.0 1.30.2 1.29.0 1.25.3" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${SPRUCE}"' \
   URL='https://github.com/geofffranks/spruce/releases/download/v${SPRUCE_VERSION}/spruce-linux-amd64' \
@@ -248,7 +248,7 @@ function logcli() {
 
   VERSION_LIST="2.8.2 2.7.5" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='unzip -o -d "$(dirname ${LOGCLI})" "${LOGCLI}" && mv "$(dirname ${LOGCLI})/logcli-linux-amd64" "${LOGCLI}" && chmod +x "${LOGCLI}"' \
   URL='https://github.com/grafana/loki/releases/download/v${LOGCLI_VERSION}/logcli-linux-amd64.zip' \
@@ -264,7 +264,7 @@ function trivy() {
 
   VERSION_LIST="0.60.0 0.49.1" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${TRIVY})" -zxf "${TRIVY}" && chmod +x "${TRIVY}"' \
   URL='https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz' \
@@ -280,7 +280,7 @@ function kustomize() {
 
   VERSION_LIST="5.4.1" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${KUSTOMIZE})" -zxf "${KUSTOMIZE}" && chmod +x "${KUSTOMIZE}"' \
   URL='https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz' \
@@ -296,7 +296,7 @@ function argocd() {
 
   VERSION_LIST="2.11.0" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${ARGOCD}"' \
   URL='https://github.com/argoproj/argo-cd/releases/download/v2.11.0/argocd-linux-amd64' \
@@ -312,7 +312,7 @@ function cmctl() {
 
   VERSION_LIST="2.1.0" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${CMCTL}"' \
   URL='https://github.com/cert-manager/cmctl/releases/download/v${CMCTL_VERSION}/cmctl_linux_amd64' \
@@ -328,7 +328,7 @@ function gh() {
 
   VERSION_LIST="2.55.0" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${GH})" -zxf "${GH}" && ls -la "${GH}" && cp "$(dirname ${GH})/gh_${GH_VERSION}_linux_amd64/bin/gh" "${GH}" && chmod +x "${GH}"' \
   URL='https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz' \
@@ -344,7 +344,7 @@ function snx-rs() {
 
   VERSION_LIST="3.1.2" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${SNX_RS})" --xz -xf "${SNX_RS}" && ls -la "${SNX_RS}" && cp "$(dirname ${SNX_RS})/snx-rs-v${SNX_RS_VERSION}-linux-x86_64/snx-rs" "${SNX_RS}" && chmod +x "${SNX_RS}"' \
   URL='https://github.com/ancwrd1/snx-rs/releases/download/v${SNX_RS_VERSION}/snx-rs-v${SNX_RS_VERSION}-linux-x86_64.tar.xz' \
@@ -360,7 +360,7 @@ function grype() {
 
   VERSION_LIST="0.92.0" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${GRYPE})" -xzf "${GRYPE}"' \
   URL='https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz' \
@@ -376,7 +376,7 @@ function marp() {
 
   VERSION_LIST="4.2.3" \
   EXPECTATION='must be in format of X.Y.Z' \
-  TEST_METHOD='tr -d [:alnum:]' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${MARP})" -xzf "${MARP}"' \
   URL='https://github.com/marp-team/marp-cli/releases/download/v${MARP_VERSION}/marp-cli-v${MARP_VERSION}-linux.tar.gz' \
