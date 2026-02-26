@@ -1,0 +1,50 @@
+{
+    "border": "none",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2120,
+       "width": 1890,
+       "x": 20,
+       "y": 20
+    },
+    "marks": [],
+    "name": "AvisBudgetGroupSlack - platform-devops-product-team (Channel) - AvisBudgetGroup - Slack",
+    "percent": 0.5,
+    "swallows": [
+       {
+          "class": "^Google\\-chrome$",
+          "instance": "^crx_picmlnmenggjbgcdegpdmpikopejciah$",
+          "machine": "^riker$",
+          "title": "^AvisBudgetGroupSlack\\ \\-\\ platform\\-devops\\-product\\-team\\ \\(Channel\\)\\ \\-\\ AvisBudgetGroup\\ \\-\\ Slack$",
+          "window_role": "^pop\\-up$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1200,
+       "width": 1600,
+       "x": 1120,
+       "y": 480
+    },
+    "marks": [],
+    "name": "(1) Chat | cluster upgrade | Microsoft Teams",
+    "percent": 0.5,
+    "swallows": [
+       {
+          "class": "^teams\\-for\\-linux$",
+          "instance": "^teams\\-for\\-linux$",
+          "machine": "^riker$",
+          "title": "^\\(1\\)\\ Chat\\ \\|\\ cluster\\ upgrade\\ \\|\\ Microsoft\\ Teams$",
+          "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+

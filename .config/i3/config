@@ -178,11 +178,13 @@ exec --no-startup-id i3-msg 'workspace $ws1; append_layout ~/.config/i3/workspac
 exec --no-startup-id i3-msg 'workspace $ws2; append_layout ~/.config/i3/workspace2.json'
 exec --no-startup-id i3-msg 'workspace $ws3; append_layout ~/.config/i3/workspace3.json'
 exec --no-startup-id i3-msg 'workspace $ws4; append_layout ~/.config/i3/workspace4.json'
+exec --no-startup-id i3-msg 'workspace $ws5; append_layout ~/.config/i3/workspace5.json'
+exec --no-startup-id i3-msg 'workspace $ws6; append_layout ~/.config/i3/workspace6.json'
 
 # swallowing != starting, launch the apps!
 exec --no-startup-id i3-msg 'workspace $ws1; exec google-chrome-stable'
 exec --no-startup-id i3-msg 'workspace $ws1; exec code'
 exec --no-startup-id i3-msg 'workspace $ws1; exec ghostty'
 exec --no-startup-id i3-msg 'workspace $ws1; exec teams-for-linux'
-exec --no-startup-id i3-msg 'workspace $ws1; exec outlook-for-linux'
 exec --no-startup-id i3-msg 'workspace $ws1; exec slack'
+exec --no-startup-id i3-msg 'workspace $ws1; exec thunderbird'

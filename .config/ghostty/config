@@ -10,3 +10,5 @@ font-family = Droid Sans Mono
 window-decoration = false
 window-theme = dark
 clipboard-paste-protection = false
+
+link-previews = false

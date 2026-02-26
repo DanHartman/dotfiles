@@ -1,0 +1,50 @@
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2084,
+       "width": 1276,
+       "x": 0,
+       "y": 0
+    },
+    "marks": [],
+    "name": "Inbox - dan@wescaleout.com - Mozilla Thunderbird",
+    "percent": 0.5,
+    "swallows": [
+       {
+          "class": "^org\\.mozilla\\.Thunderbird$",
+          "instance": "^Mail$",
+          "machine": "^riker$",
+          "title": "^Inbox\\ \\-\\ dan\\@wescaleout\\.com\\ \\-\\ Mozilla\\ Thunderbird$",
+          "window_role": "^3pane$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "none",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2120,
+       "width": 1890,
+       "x": 20,
+       "y": 20
+    },
+    "marks": [],
+    "name": "Outlook (PWA) - Mail - Hartman, Dan - Outlook",
+    "percent": 0.5,
+    "swallows": [
+       {
+          "class": "^Google\\-chrome$",
+          "instance": "^crx_faolnafnngnfdaknnbpnkhgohbobgegn$",
+          "machine": "^riker$",
+          "title": "^Outlook\\ \\(PWA\\)\\ \\-\\ Mail\\ \\-\\ Hartman\\,\\ Dan\\ \\-\\ Outlook$",
+          "window_role": "^pop\\-up$"
+       }
+    ],
+    "type": "con"
+}
+
