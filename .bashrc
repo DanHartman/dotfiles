@@ -382,3 +382,19 @@ function marp() {
   URL='https://github.com/marp-team/marp-cli/releases/download/v${MARP_VERSION}/marp-cli-v${MARP_VERSION}-linux.tar.gz' \
   validate_version_and_get_tool "MARP" "MARP_VERSION" && "${MARP}" "$@"
 }
+
+export PACKER_VERSION="${PACKER_VERSION:-1.15.0}"
+function packer() {
+  export PACKER="${HOME}/packer/${PACKER_VERSION}/packer"
+  PATH_PACKER="${HOME}/.local/bin/packer"
+  test -f "${PATH_PACKER}" || make_entrypoint 'packer "$@"' > "${PATH_PACKER}"
+  test -x "${PATH_PACKER}" || chmod +x "${PATH_PACKER}"
+
+  VERSION_LIST="1.15.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='unzip -o -d "$(dirname ${PACKER})" "${PACKER}" && chmod +x "${PACKER}"' \
+  URL='https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip' \
+  validate_version_and_get_tool "PACKER" "PACKER_VERSION" && "${PACKER}" "$@"
+}
