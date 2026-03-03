@@ -398,3 +398,19 @@ function packer() {
   URL='https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip' \
   validate_version_and_get_tool "PACKER" "PACKER_VERSION" && "${PACKER}" "$@"
 }
+
+export TALOSCTL_VERSION="${TALOSCTL_VERSION:-1.12.4}"
+function talosctl() {
+  export TALOSCTL="${HOME}/talosctl/${TALOSCTL_VERSION}/talosctl"
+  PATH_TALOSCTL="${HOME}/.local/bin/talosctl"
+  test -f "${PATH_TALOSCTL}" || make_entrypoint 'talosctl "$@"' > "${PATH_TALOSCTL}"
+  test -x "${PATH_TALOSCTL}" || chmod +x "${PATH_TALOSCTL}"
+
+  VERSION_LIST="1.12.4" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='chmod +x "${TALOSCTL}"' \
+  URL='https://github.com/siderolabs/talos/releases/download/v${TALOSCTL_VERSION}/talosctl-linux-amd64' \
+  validate_version_and_get_tool "TALOSCTL" "TALOSCTL_VERSION" && "${TALOSCTL}" "$@"
+}
