@@ -414,3 +414,19 @@ function talosctl() {
   URL='https://github.com/siderolabs/talos/releases/download/v${TALOSCTL_VERSION}/talosctl-linux-amd64' \
   validate_version_and_get_tool "TALOSCTL" "TALOSCTL_VERSION" && "${TALOSCTL}" "$@"
 }
+
+export GLOOCTL_VERSION="${GLOOCTL_VERSION:-1.20.11}"
+function glooctl() {
+  export GLOOCTL="${HOME}/glooctl/${GLOOCTL_VERSION}/glooctl"
+  PATH_GLOOCTL="${HOME}/.local/bin/glooctl"
+  test -f "${PATH_GLOOCTL}" || make_entrypoint 'glooctl "$@"' > "${PATH_GLOOCTL}"
+  test -x "${PATH_GLOOCTL}" || chmod +x "${PATH_GLOOCTL}"
+
+  VERSION_LIST="1.20.11" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='chmod +x "${GLOOCTL}"' \
+  URL='https://github.com/solo-io/gloo/releases/download/v${GLOOCTL_VERSION}/glooctl-linux-amd64' \
+  validate_version_and_get_tool "GLOOCTL" "GLOOCTL_VERSION" && "${GLOOCTL}" "$@"
+}
