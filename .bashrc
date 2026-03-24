@@ -81,6 +81,7 @@ function validate_version_and_get_tool() {
   : "${!1?"expected variable ${1} to be set, pass the name of the variable that has the path to the versioned tool"}"
   : "${!2?"expected variable ${2} to be set, pass the name of the version variable for the target tool"}"
   : "${URL?"expected variable \${URL} to be set"}"
+  : "${OUTPUT?"expected variable \${OUTPUT} to be set"}"
 
   # decay the indirection to named variables
   ABSOLUTE_PATH_TO_TOOL="${!1}"
@@ -104,26 +105,27 @@ function validate_version_and_get_tool() {
     test -d "$(dirname ${ABSOLUTE_PATH_TO_TOOL})" || mkdir -p "$(dirname ${ABSOLUTE_PATH_TO_TOOL})"
 
     # download the given URL
-    curl -L "$(envsubst <<< "${URL}")" > "${ABSOLUTE_PATH_TO_TOOL}"
+    curl -L "$(envsubst <<< "${URL}")" > "${OUTPUT}"
 
     # unpack download
     eval "$(echo "${UNPACK}" | envsubst)"
   }
 }
 
-export JQ_VERSION="${JQ_VERSION:-1.7}"
+export JQ_VERSION="${JQ_VERSION:-1.8.1}"
 function jq() {
   export JQ="${HOME}/jq/${JQ_VERSION}/jq"
   PATH_JQ="${HOME}/.local/bin/jq"
   test -f "${PATH_JQ}" || make_entrypoint 'jq "$@"' > "${PATH_JQ}"
   test -x "${PATH_JQ}" || chmod +x "${PATH_JQ}"
 
-  VERSION_LIST="1.5 1.6 1.7" \
+  VERSION_LIST="1.7.1 1.8.1" \
   EXPECTATION='must be in format of X.Y' \
   TEST_METHOD='tr -d "[:alnum:]"' \
-  VALID_OUTPUT='.' \
+  VALID_OUTPUT='..' \
   UNPACK='chmod +x "${JQ}"' \
   URL='https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64' \
+  OUTPUT="$JQ" \
   validate_version_and_get_tool "JQ" "JQ_VERSION" && "${JQ}" "$@"
 }
 
@@ -140,6 +142,7 @@ function yq() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${YQ}"' \
   URL='https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_386' \
+  OUTPUT="$YQ" \
   validate_version_and_get_tool "YQ" "YQ_VERSION" && "${YQ}" "$@"
 }
 
@@ -156,6 +159,7 @@ function kubectl() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${KUBECTL}"' \
   URL='https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl' \
+  OUTPUT="$KUBECTL" \
   validate_version_and_get_tool "KUBECTL" "KUBECTL_VERSION" && "${KUBECTL}" "$@"
 }
 
@@ -172,6 +176,7 @@ function istioctl() {
   VALID_OUTPUT='..' \
   UNPACK='tar --directory="$(dirname ${ISTIOCTL})" -xf "${ISTIOCTL}" && mv "$(dirname $(dirname ${ISTIOCTL}))/${ISTIOCTL_VERSION}/istio-${ISTIOCTL_VERSION}/bin/istioctl" "${ISTIOCTL}" && chmod +x "${ISTIOCTL}"' \
   URL='https://github.com/istio/istio/releases/download/${ISTIOCTL_VERSION}/istio-${ISTIOCTL_VERSION}-linux-amd64.tar.gz' \
+  OUTPUT="$ISTIOCTL" \
   validate_version_and_get_tool "ISTIOCTL" "ISTIOCTL_VERSION" && "${ISTIOCTL}" "$@"
 }
 
@@ -188,6 +193,7 @@ function terraform() {
   VALID_OUTPUT='..' \
   UNPACK='unzip -o -d "$(dirname ${TERRAFORM})" "${TERRAFORM}" && chmod +x "${TERRAFORM}"' \
   URL='https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip' \
+  OUTPUT="$TERRAFORM" \
   validate_version_and_get_tool "TERRAFORM" "TERRAFORM_VERSION" && "${TERRAFORM}" "$@"
 }
 
@@ -204,6 +210,7 @@ function meshctl() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${MESHCTL}"' \
   URL='https://storage.googleapis.com/meshctl/v${MESHCTL_VERSION}/meshctl-linux-amd64' \
+  OUTPUT="$MESHCTL" \
   validate_version_and_get_tool "MESHCTL" "MESHCTL_VERSION" && "${MESHCTL}" "$@"
 }
 
@@ -220,6 +227,7 @@ function helm() {
   VALID_OUTPUT='..' \
   UNPACK='tar -zxf "${HELM}" && mv linux-amd64/helm "${HELM}"' \
   URL='https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz' \
+  OUTPUT="$HELM" \
   validate_version_and_get_tool "HELM" "HELM_VERSION" && "${HELM}" "$@"
 }
 
@@ -236,6 +244,7 @@ function spruce() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${SPRUCE}"' \
   URL='https://github.com/geofffranks/spruce/releases/download/v${SPRUCE_VERSION}/spruce-linux-amd64' \
+  OUTPUT="$SPRUCE" \
   validate_version_and_get_tool "SPRUCE" "SPRUCE_VERSION" && "${SPRUCE}" "$@"
 }
 
@@ -252,6 +261,7 @@ function logcli() {
   VALID_OUTPUT='..' \
   UNPACK='unzip -o -d "$(dirname ${LOGCLI})" "${LOGCLI}" && mv "$(dirname ${LOGCLI})/logcli-linux-amd64" "${LOGCLI}" && chmod +x "${LOGCLI}"' \
   URL='https://github.com/grafana/loki/releases/download/v${LOGCLI_VERSION}/logcli-linux-amd64.zip' \
+  OUTPUT="$LOGCLI" \
   validate_version_and_get_tool "LOGCLI" "LOGCLI_VERSION" && "${LOGCLI}" "$@"
 }
 
@@ -268,6 +278,7 @@ function trivy() {
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${TRIVY})" -zxf "${TRIVY}" && chmod +x "${TRIVY}"' \
   URL='https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz' \
+  OUTPUT="$TRIVY" \
   validate_version_and_get_tool "TRIVY" "TRIVY_VERSION" && "${TRIVY}" "$@"
 }
 
@@ -284,6 +295,7 @@ function kustomize() {
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${KUSTOMIZE})" -zxf "${KUSTOMIZE}" && chmod +x "${KUSTOMIZE}"' \
   URL='https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz' \
+  OUTPUT="$KUSTOMIZE" \
   validate_version_and_get_tool "KUSTOMIZE" "KUSTOMIZE_VERSION" && "${KUSTOMIZE}" "$@"
 }
 
@@ -300,6 +312,7 @@ function argocd() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${ARGOCD}"' \
   URL='https://github.com/argoproj/argo-cd/releases/download/v2.11.0/argocd-linux-amd64' \
+  OUTPUT="$ARGOCD" \
   validate_version_and_get_tool "ARGOCD" "ARGOCD_VERSION" && "${ARGOCD}" "$@"
 }
 
@@ -316,6 +329,7 @@ function cmctl() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${CMCTL}"' \
   URL='https://github.com/cert-manager/cmctl/releases/download/v${CMCTL_VERSION}/cmctl_linux_amd64' \
+  OUTPUT="$CMCTL" \
   validate_version_and_get_tool "CMCTL" "CMCTL_VERSION" && "${CMCTL}" "$@"
 }
 
@@ -332,6 +346,7 @@ function gh() {
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${GH})" -zxf "${GH}" && ls -la "${GH}" && cp "$(dirname ${GH})/gh_${GH_VERSION}_linux_amd64/bin/gh" "${GH}" && chmod +x "${GH}"' \
   URL='https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz' \
+  OUTPUT="$GH" \
   validate_version_and_get_tool "GH" "GH_VERSION" && "${GH}" "$@"
 }
 
@@ -348,6 +363,7 @@ function snx-rs() {
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${SNX_RS})" --xz -xf "${SNX_RS}" && ls -la "${SNX_RS}" && cp "$(dirname ${SNX_RS})/snx-rs-v${SNX_RS_VERSION}-linux-x86_64/snx-rs" "${SNX_RS}" && chmod +x "${SNX_RS}"' \
   URL='https://github.com/ancwrd1/snx-rs/releases/download/v${SNX_RS_VERSION}/snx-rs-v${SNX_RS_VERSION}-linux-x86_64.tar.xz' \
+  OUTPUT="$SNX_RS" \
   validate_version_and_get_tool "SNX_RS" "SNX_RS_VERSION" && "${SNX_RS}" "$@"
 }
 
@@ -364,6 +380,7 @@ function grype() {
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${GRYPE})" -xzf "${GRYPE}"' \
   URL='https://github.com/anchore/grype/releases/download/v${GRYPE_VERSION}/grype_${GRYPE_VERSION}_linux_amd64.tar.gz' \
+  OUTPUT="$GRYPE" \
   validate_version_and_get_tool "GRYPE" "GRYPE_VERSION" && "${GRYPE}" "$@"
 }
 
@@ -380,6 +397,7 @@ function marp() {
   VALID_OUTPUT='..' \
   UNPACK='tar -C "$(dirname ${MARP})" -xzf "${MARP}"' \
   URL='https://github.com/marp-team/marp-cli/releases/download/v${MARP_VERSION}/marp-cli-v${MARP_VERSION}-linux.tar.gz' \
+  OUTPUT="$MARP" \
   validate_version_and_get_tool "MARP" "MARP_VERSION" && "${MARP}" "$@"
 }
 
@@ -396,6 +414,7 @@ function packer() {
   VALID_OUTPUT='..' \
   UNPACK='unzip -o -d "$(dirname ${PACKER})" "${PACKER}" && chmod +x "${PACKER}"' \
   URL='https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip' \
+  OUTPUT="$PACKER" \
   validate_version_and_get_tool "PACKER" "PACKER_VERSION" && "${PACKER}" "$@"
 }
 
@@ -412,6 +431,7 @@ function talosctl() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${TALOSCTL}"' \
   URL='https://github.com/siderolabs/talos/releases/download/v${TALOSCTL_VERSION}/talosctl-linux-amd64' \
+  OUTPUT="$TALOSCTL" \
   validate_version_and_get_tool "TALOSCTL" "TALOSCTL_VERSION" && "${TALOSCTL}" "$@"
 }
 
@@ -428,5 +448,23 @@ function glooctl() {
   VALID_OUTPUT='..' \
   UNPACK='chmod +x "${GLOOCTL}"' \
   URL='https://github.com/solo-io/gloo/releases/download/v${GLOOCTL_VERSION}/glooctl-linux-amd64' \
+  OUTPUT="$GLOOCTL" \
   validate_version_and_get_tool "GLOOCTL" "GLOOCTL_VERSION" && "${GLOOCTL}" "$@"
+}
+
+export OP_VERSION="${OP_VERSION:-2.32.1}"
+function op() {
+  export OP="${HOME}/op/${OP_VERSION}/op"
+  PATH_OP="${HOME}/.local/bin/op"
+  test -f "${PATH_OP}" || make_entrypoint 'op "$@"' > "${PATH_OP}"
+  test -x "${PATH_OP}" || chmod +x "${PATH_OP}"
+
+  VERSION_LIST="2.32.1" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='unzip -o -d "$(dirname ${OP})" "${OP}.zip" && chmod +x "${OP}"' \
+  URL='https://cache.agilebits.com/dist/1P/op2/pkg/v${OP_VERSION}/op_linux_amd64_v${OP_VERSION}.zip' \
+  OUTPUT="$OP.zip" \
+  validate_version_and_get_tool "OP" "OP_VERSION" && "${OP}" "$@"
 }
