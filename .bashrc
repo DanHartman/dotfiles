@@ -468,3 +468,20 @@ function op() {
   OUTPUT="$OP.zip" \
   validate_version_and_get_tool "OP" "OP_VERSION" && "${OP}" "$@"
 }
+
+export CONJUR_VERSION="${CONJUR_VERSION:-9.1.3}"
+function conjur() {
+  export CONJUR="${HOME}/conjur/${CONJUR_VERSION}/conjur"
+  PATH_CONJUR="${HOME}/.local/bin/conjur"
+  test -f "${PATH_CONJUR}" || make_entrypoint 'conjur "$@"' > "${PATH_CONJUR}"
+  test -x "${PATH_CONJUR}" || chmod +x "${PATH_CONJUR}"
+
+  VERSION_LIST="9.1.3" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname -- "${CONJUR}")" -xzf "${CONJUR}" --strip-components=1' \
+  URL='https://github.com/cyberark/conjur-cli-go/releases/download/v${CONJUR_VERSION}/conjur-cli_${CONJUR_VERSION}_linux_amd64.tar.gz' \
+  OUTPUT="$CONJUR" \
+  validate_version_and_get_tool "CONJUR" "CONJUR_VERSION" && "${CONJUR}" "$@"
+}
