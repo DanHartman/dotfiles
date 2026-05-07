@@ -265,14 +265,14 @@ function logcli() {
   validate_version_and_get_tool "LOGCLI" "LOGCLI_VERSION" && "${LOGCLI}" "$@"
 }
 
-export TRIVY_VERSION="${TRIVY_VERSION:-0.60.0}"
+export TRIVY_VERSION="${TRIVY_VERSION:-0.70.0}"
 function trivy() {
   export TRIVY="${HOME}/trivy/${TRIVY_VERSION}/trivy"
   PATH_TRIVY="${HOME}/.local/bin/trivy"
   test -f "${PATH_TRIVY}" || make_entrypoint 'trivy "$@"' > "${PATH_TRIVY}"
   test -x "${PATH_TRIVY}" || chmod +x "${PATH_TRIVY}"
 
-  VERSION_LIST="0.60.0 0.49.1" \
+  VERSION_LIST="0.70.0 0.60.0 0.49.1" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
