@@ -485,3 +485,20 @@ function conjur() {
   OUTPUT="$CONJUR" \
   validate_version_and_get_tool "CONJUR" "CONJUR_VERSION" && "${CONJUR}" "$@"
 }
+
+export KUBELOGIN_VERSION="${KUBELOGIN_VERSION:-1.36.1}"
+function kubelogin() {
+  export KUBELOGIN="${HOME}/kubelogin/${KUBELOGIN_VERSION}/kubelogin"
+  PATH_KUBELOGIN="${HOME}/.local/bin/kubelogin"
+  test -f "${PATH_KUBELOGIN}" || make_entrypoint 'kubelogin "$@"' > "${PATH_KUBELOGIN}"
+  test -x "${PATH_KUBELOGIN}" || chmod +x "${PATH_KUBELOGIN}"
+
+  VERSION_LIST="1.36.1" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='unzip -o -d "$(dirname ${KUBELOGIN})" "${KUBELOGIN}" && ls -la && pwd && chmod +x "${KUBELOGIN}"' \
+  URL='https://github.com/int128/kubelogin/releases/download/v${KUBELOGIN_VERSION}/kubelogin_linux_amd64.zip' \
+  OUTPUT="$KUBELOGIN.zip" \
+  validate_version_and_get_tool "KUBELOGIN" "KUBELOGIN_VERSION" && "${KUBELOGIN}" "$@"
+}
