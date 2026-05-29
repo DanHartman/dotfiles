@@ -171,6 +171,8 @@ set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
 
 # append_layout reads from a json file that defines which applications
 # a desktop should "swallow"
