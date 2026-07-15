@@ -487,10 +487,10 @@ function conjur() {
 }
 
 export KUBELOGIN_VERSION="${KUBELOGIN_VERSION:-1.36.1}"
-function kubelogin() {
-  export KUBELOGIN="${HOME}/kubelogin/${KUBELOGIN_VERSION}/kubelogin"
-  PATH_KUBELOGIN="${HOME}/.local/bin/kubelogin"
-  test -f "${PATH_KUBELOGIN}" || make_entrypoint 'kubelogin "$@"' > "${PATH_KUBELOGIN}"
+function kubectl-oidc_login() {
+  export KUBELOGIN="${HOME}/kubectl-oidc_login/${KUBELOGIN_VERSION}/kubectl-oidc_login"
+  PATH_KUBELOGIN="${HOME}/.local/bin/kubectl-oidc_login"
+  test -f "${PATH_KUBELOGIN}" || make_entrypoint 'kubectl-oidc_login "$@"' > "${PATH_KUBELOGIN}"
   test -x "${PATH_KUBELOGIN}" || chmod +x "${PATH_KUBELOGIN}"
 
   VERSION_LIST="1.36.1" \
@@ -501,4 +501,55 @@ function kubelogin() {
   URL='https://github.com/int128/kubelogin/releases/download/v${KUBELOGIN_VERSION}/kubelogin_linux_amd64.zip' \
   OUTPUT="$KUBELOGIN.zip" \
   validate_version_and_get_tool "KUBELOGIN" "KUBELOGIN_VERSION" && "${KUBELOGIN}" "$@"
+}
+
+export CILIUM_VERSION="${CILIUM_VERSION:-0.19.4}"
+function cilium() {
+  export CILIUM="${HOME}/cilium/${CILIUM_VERSION}/cilium"
+  PATH_CILIUM="${HOME}/.local/bin/cilium"
+  test -f "${PATH_CILIUM}" || make_entrypoint 'cilium "$@"' > "${PATH_CILIUM}"
+  test -x "${PATH_CILIUM}" || chmod +x "${PATH_CILIUM}"
+
+  VERSION_LIST="0.19.4" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname -- "${CILIUM}")" -xzf "${CILIUM}"' \
+  URL='https://github.com/cilium/cilium-cli/releases/download/v${CILIUM_VERSION}/cilium-linux-amd64.tar.gz' \
+  OUTPUT="$CILIUM" \
+  validate_version_and_get_tool "CILIUM" "CILIUM_VERSION" && "${CILIUM}" "$@"
+}
+
+export ETCDCTL_VERSION="${ETCDCTL_VERSION:-3.7.0}"
+function etcdctl() {
+  export ETCDCTL="${HOME}/etcdctl/${ETCDCTL_VERSION}/etcdctl"
+  PATH_ETCDCTL="${HOME}/.local/bin/etcdctl"
+  test -f "${PATH_ETCDCTL}" || make_entrypoint 'etcdctl "$@"' > "${PATH_ETCDCTL}"
+  test -x "${PATH_ETCDCTL}" || chmod +x "${PATH_ETCDCTL}"
+
+  VERSION_LIST="3.7.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname -- "${ETCDCTL}")" -xzf "${ETCDCTL}" --strip-components=1' \
+  URL='https://github.com/etcd-io/etcd/releases/download/v${ETCDCTL_VERSION}/etcd-v${ETCDCTL_VERSION}-linux-amd64.tar.gz' \
+  OUTPUT="$ETCDCTL" \
+  validate_version_and_get_tool "ETCDCTL" "ETCDCTL_VERSION" && "${ETCDCTL}" "$@"
+}
+
+export KYVERNO_VERSION="${KYVERNO_VERSION:-1.12.0}"
+function kyverno() {
+  export KYVERNO="${HOME}/kyverno/${KYVERNO_VERSION}/kyverno"
+  PATH_KYVERNO="${HOME}/.local/bin/kyverno"
+  test -f "${PATH_KYVERNO}" || make_entrypoint 'kyverno "$@"' > "${PATH_KYVERNO}"
+  test -x "${PATH_KYVERNO}" || chmod +x "${PATH_KYVERNO}"
+
+  VERSION_LIST="1.12.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname -- "${KYVERNO}")" -xzf "${KYVERNO}"' \
+  URL='https://github.com/kyverno/kyverno/releases/download/v${KYVERNO_VERSION}/kyverno-cli_v${KYVERNO_VERSION}_linux_x86_64.tar.gz' \
+  OUTPUT="$KYVERNO" \
+  validate_version_and_get_tool "KYVERNO" "KYVERNO_VERSION" && "${KYVERNO}" "$@"
 }
