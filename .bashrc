@@ -266,14 +266,14 @@ function logcli() {
   validate_version_and_get_tool "LOGCLI" "LOGCLI_VERSION" && "${LOGCLI}" "$@"
 }
 
-export TRIVY_VERSION="${TRIVY_VERSION:-0.70.0}"
+export TRIVY_VERSION="${TRIVY_VERSION:-0.74.0}"
 function trivy() {
   export TRIVY="${HOME}/trivy/${TRIVY_VERSION}/trivy"
   PATH_TRIVY="${HOME}/.local/bin/trivy"
   test -f "${PATH_TRIVY}" || make_entrypoint 'trivy "$@"' > "${PATH_TRIVY}"
   test -x "${PATH_TRIVY}" || chmod +x "${PATH_TRIVY}"
 
-  VERSION_LIST="0.70.0 0.60.0 0.49.1" \
+  VERSION_LIST="0.74.0 0.70.0 0.60.0 0.49.1" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
@@ -368,14 +368,14 @@ function snx-rs() {
   validate_version_and_get_tool "SNX_RS" "SNX_RS_VERSION" && "${SNX_RS}" "$@"
 }
 
-export GRYPE_VERSION="${GRYPE_VERSION:-0.92.0}"
+export GRYPE_VERSION="${GRYPE_VERSION:-0.117.0}"
 function grype() {
   export GRYPE="${HOME}/grype/${GRYPE_VERSION}/grype"
   PATH_GRYPE="${HOME}/.local/bin/grype"
   test -f "${PATH_GRYPE}" || make_entrypoint 'grype "$@"' > "${PATH_GRYPE}"
   test -x "${PATH_GRYPE}" || chmod +x "${PATH_GRYPE}"
 
-  VERSION_LIST="0.92.0" \
+  VERSION_LIST="0.117.0 0.92.0" \
   EXPECTATION='must be in format of X.Y.Z' \
   TEST_METHOD='tr -d "[:alnum:]"' \
   VALID_OUTPUT='..' \
