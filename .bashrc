@@ -553,3 +553,20 @@ function kyverno() {
   OUTPUT="$KYVERNO" \
   validate_version_and_get_tool "KYVERNO" "KYVERNO_VERSION" && "${KYVERNO}" "$@"
 }
+
+export SYFT_VERSION="${SYFT_VERSION:-1.54.0}"
+function syft() {
+  export SYFT="${HOME}/syft/${SYFT_VERSION}/syft"
+  PATH_SYFT="${HOME}/.local/bin/syft"
+  test -f "${PATH_SYFT}" || make_entrypoint 'syft "$@"' > "${PATH_SYFT}"
+  test -x "${PATH_SYFT}" || chmod +x "${PATH_SYFT}"
+
+  VERSION_LIST="1.54.0" \
+  EXPECTATION='must be in format of X.Y.Z' \
+  TEST_METHOD='tr -d "[:alnum:]"' \
+  VALID_OUTPUT='..' \
+  UNPACK='tar -C "$(dirname -- "${SYFT}")" -xzf "${SYFT}"' \
+  URL='https://github.com/anchore/syft/releases/download/v${SYFT_VERSION}/syft_${SYFT_VERSION}_linux_amd64.tar.gz' \
+  OUTPUT="$SYFT" \
+  validate_version_and_get_tool "SYFT" "SYFT_VERSION" && "${SYFT}" "$@"
+}
